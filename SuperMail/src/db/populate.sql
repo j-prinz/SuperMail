@@ -31,16 +31,16 @@ INSERT INTO PostOfficeDetails
 INSERT INTO PostOfficeDetails
   VALUES (95, 'Brighouse', 'Richmond');
 
-INSERT INTO AreaServicedByPO
-  VALUES ('Vancouver', 91);
-INSERT INTO AreaServicedByPO
-  VALUES ('Burnaby', 92);
-INSERT INTO AreaServicedByPO
-  VALUES ('Surrey', 93);
-INSERT INTO AreaServicedByPO
-  VALUES ('Whistler', 94);
-INSERT INTO AreaServicedByPO
-  VALUES ('Richmond', 95);
+-- INSERT INTO AreaServicedByPO
+--   VALUES ('Vancouver', 91);
+-- INSERT INTO AreaServicedByPO
+--   VALUES ('Burnaby', 92);
+-- INSERT INTO AreaServicedByPO
+--   VALUES ('Surrey', 93);
+-- INSERT INTO AreaServicedByPO
+--   VALUES ('Whistler', 94);
+-- INSERT INTO AreaServicedByPO
+--   VALUES ('Richmond', 95);
 
 INSERT INTO MailboxServicedBy
   VALUES (1000, 91);
