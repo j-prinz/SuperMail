@@ -54,6 +54,7 @@ CREATE TABLE PostOffice (
   FOREIGN KEY (POID) REFERENCES PostOfficeDetails(POID) ON DELETE SET NULL
 );
 
+-- Why are we not using this?
 -- CREATE TABLE AreaServicedByPO (
 --   Work_Area CHAR(20) PRIMARY KEY,
 --   POID INT,
