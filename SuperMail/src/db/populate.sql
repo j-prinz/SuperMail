@@ -31,16 +31,16 @@ INSERT INTO PostOfficeDetails
 INSERT INTO PostOfficeDetails
   VALUES (95, 'Brighouse', 'Richmond');
 
--- INSERT INTO AreaServicedByPO
---   VALUES ('Vancouver', 91);
--- INSERT INTO AreaServicedByPO
---   VALUES ('Burnaby', 92);
--- INSERT INTO AreaServicedByPO
---   VALUES ('Surrey', 93);
--- INSERT INTO AreaServicedByPO
---   VALUES ('Whistler', 94);
--- INSERT INTO AreaServicedByPO
---   VALUES ('Richmond', 95);
+INSERT INTO AreaServicedByPO
+  VALUES (91,'Vancouver');
+INSERT INTO AreaServicedByPO
+  VALUES (92,'Burnaby');
+INSERT INTO AreaServicedByPO
+  VALUES (93,'Surrey');
+INSERT INTO AreaServicedByPO
+  VALUES (94,'Whistler');
+INSERT INTO AreaServicedByPO
+  VALUES (95,'Richmond');
 
 INSERT INTO MailboxServicedBy
   VALUES (1000, 91);
@@ -65,26 +65,26 @@ INSERT INTO Customer
   VALUES (105, 'Andrew', 6155555195, '453 East Mall, Surrey, BC');
 
 INSERT INTO Receiver
-  VALUES (111, 'Travis', 6135530191, '33 Kerr St, Vancouver, BC');
+  VALUES (111, 'Travis', '33 Kerr St, Vancouver, BC', 'v4a2w2');
 INSERT INTO Receiver
-  VALUES (112, 'Paul', 6135530192, '456 Guildford Ave, Surrey, BC');
+  VALUES (112, 'Paul', '456 Guildford Ave, Surrey, BC', 'p2r3r3');
 INSERT INTO Receiver
-  VALUES (113, 'Samantha', 6135530193, '22 Blackcomb Blvd, Whistler, BC');
+  VALUES (113, 'Samantha', '22 Blackcomb Blvd, Whistler, BC', 'd6w4d3');
 INSERT INTO Receiver
-  VALUES (114, 'Bonnie', 6135530194, '570 Simon Fraser Ave, Burnaby, BC');
+  VALUES (114, 'Bonnie', '570 Simon Fraser Ave, Burnaby, BC', '8da3f5');
 INSERT INTO Receiver
-  VALUES (115, 'Tam', 6135530195, '456 Brighouse Ave, Richmond, BC');
+  VALUES (115, 'Tam', '456 Brighouse Ave, Richmond, BC', '5j63f2');
 
 INSERT INTO DeliveryOrder
-  VALUES (001, 101, 3333, '2020-02-20', 'high', 'delivered', 6.99, 112);
+  VALUES (001, 101, 3333, '20-FEB-2020', 'high', 'delivered', 6.99, 112);
 INSERT INTO DeliveryOrder
-  VALUES (002, 102, 5555, '2020-03-17', 'low', 'enroute', 53.99, 113);
+  VALUES (002, 102, 5555, '01-MAY-2020', 'low', 'enroute', 53.99, 113);
 INSERT INTO DeliveryOrder
-  VALUES (003, 103, 4444, '2020-01-11', 'medium', 'delivered', 58.00, 114);
+  VALUES (003, 103, 4444, '20-JAN-2020', 'medium', 'delivered', 58.00, 114);
 INSERT INTO DeliveryOrder
-  VALUES (004, 104, 1111, '2020-02-08', 'high', 'delivered', 288.43, 115);
+  VALUES (004, 104, 1111, '28-MAR-2020', 'high', 'delivered', 288.43, 115);
 INSERT INTO DeliveryOrder
-  VALUES (005, 105, 2222, '2020-03-23', 'high', 'enroute', 6.99, 116);
+  VALUES (005, 105, 2222, '08-FEB-2020', 'high', 'enroute', 6.99, 111);
 
 INSERT INTO Items
   VALUES (1, 001, 1, 2, 3, 1, 'TRUE');
