@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SuperMail1.iml" filepath="$PROJECT_DIR$/SuperMail1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SuperMail.iml" filepath="$PROJECT_DIR$/SuperMail.iml" />
     </modules>
   </component>
 </project>
