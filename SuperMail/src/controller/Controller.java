@@ -1,4 +1,7 @@
-package ui;
+package controller;
+
+import delegates.PackageTrackingDelegate;
+import ui.PackageTracking;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -6,8 +9,13 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Controller {
+public class Controller implements PackageTrackingDelegate {
     public static void main(String[] args) throws IOException {
+
+        PackageTracking test = new PackageTracking();
+
+
+
         JFrame frame=new JFrame();
         JPanel top = new JPanel();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,8 +29,6 @@ public class Controller {
         frame.setIconImage(ImageIO.read(new File("SuperMail/images/profile.png")));
 
 
-
-
         JButton b=new JButton("does it work?");
         b.setBounds(130,100,300, 40);
 
@@ -32,4 +38,14 @@ public class Controller {
         frame.setLayout(null);
         frame.setVisible(true);
     }
-}  
+
+    @Override
+    public void databaseSetup() {
+
+    }
+
+    @Override
+    public void terminalTransactionsFinished() {
+
+    }
+}
