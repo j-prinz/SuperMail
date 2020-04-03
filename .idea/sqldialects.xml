@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/SuperMail/out/production/SuperMail/db/populate.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/SuperMail/src/sql/scripts/create.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/SuperMail/src/sql/scripts/populate.sql" dialect="GenericSQL" />
     <file url="PROJECT" dialect="OracleSqlPlus" />
