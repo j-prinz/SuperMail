@@ -9,7 +9,6 @@ DROP TABLE Customer;
 DROP TABLE Receiver;
 DROP TABLE Employee;
 
-
 CREATE TABLE Customer (
   Customer_ID INT PRIMARY KEY,
   Customer_Name CHAR(20),
@@ -65,8 +64,8 @@ CREATE TABLE DeliveryOrder (
     Customer_ID INT,
     EID INT,
     INITIAL_DATE DATE,
-    DELIVERY_DATE DATE,
-    Priority CHAR(6),
+--     DELIVERY_DATE DATE,
+--     Priority CHAR(6),
     Delivery_Status CHAR(10),
     Pricing REAL,
     Receiver_ID INT,

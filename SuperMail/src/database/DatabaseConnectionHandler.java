@@ -1,8 +1,6 @@
 package database;
 
-//import ca.ubc.cs304.model.BranchModel;
-
-
+import model.DeliveryOrderModel;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -10,9 +8,8 @@ import java.util.ArrayList;
  * This class handles all database related transactions
  */
 public class DatabaseConnectionHandler {
+
     // Use this version of the ORACLE_URL if you are running the code off of the server
-    //	private static final String ORACLE_URL = "jdbc:oracle:thin:@dbhost.students.cs.ubc.ca:1522:stu";
-    // Use this version of the ORACLE_URL if you are tunneling into the undergrad servers
     private static final String ORACLE_URL = "jdbc:oracle:thin:@localhost:1522:stu";
     private static final String EXCEPTION_TAG = "[EXCEPTION]";
     private static final String WARNING_TAG = "[WARNING]";
@@ -39,14 +36,14 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    /*public void deleteBranch(int branchId) {
+    public void deleteOrder(int orderId) {
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
-            ps.setInt(1, branchId);
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM DeliveryOrder WHERE Order_ID = ?");
+            ps.setInt(1, orderId);
 
             int rowCount = ps.executeUpdate();
             if (rowCount == 0) {
-                System.out.println(WARNING_TAG + " Branch " + branchId + " does not exist!");
+                System.out.println(WARNING_TAG + " Order number " + orderId + " does not exist!");
             }
 
             connection.commit();
@@ -58,18 +55,16 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public void insertBranch(BranchModel model) {
+    public void insertOrder(DeliveryOrderModel model) {
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO branch VALUES (?,?,?,?,?)");
-            ps.setInt(1, model.getId());
-            ps.setString(2, model.getName());
-            ps.setString(3, model.getAddress());
-            ps.setString(4, model.getCity());
-            if (model.getPhoneNumber() == 0) {
-                ps.setNull(5, java.sql.Types.INTEGER);
-            } else {
-                ps.setInt(5, model.getPhoneNumber());
-            }
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO DeliveryOrder VALUES (?,?,?,?,?,?,?)");
+            ps.setInt(1, model.getOrder_ID());
+            ps.setInt(2, model.getCustomer_ID());
+            ps.setInt(3, model.getEID());
+            ps.setString(4, model.getDate());
+            ps.setString(5, model.getDelivery_Status());
+            ps.setDouble(6, model.getPricing());
+            ps.setInt(7, model.getReceiver_ID());
 
             ps.executeUpdate();
             connection.commit();
@@ -81,30 +76,23 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public BranchModel[] getBranchInfo() {
-        ArrayList<BranchModel> result = new ArrayList<BranchModel>();
+    public DeliveryOrderModel[] getOrderInfo() {
+        ArrayList<DeliveryOrderModel> result = new ArrayList<DeliveryOrderModel>();
 
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM branch");
-
-//    		// get info on ResultSet
-//    		ResultSetMetaData rsmd = rs.getMetaData();
-//
-//    		System.out.println(" ");
-//
-//    		// display column names;
-//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
-//    			// get column name and print it
-//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-//    		}
+            ResultSet rs = stmt.executeQuery("SELECT * FROM DeliveryOrder");
 
             while(rs.next()) {
-                BranchModel model = new BranchModel(rs.getString("branch_addr"),
-                                                    rs.getString("branch_city"),
-                                                    rs.getInt("branch_id"),
-                                                    rs.getString("branch_name"),
-                                                    rs.getInt("branch_phone"));
+                DeliveryOrderModel model = new DeliveryOrderModel(
+                        rs.getInt("Order_ID"),
+                        rs.getInt("Customer_ID"),
+                        rs.getInt("EID"),
+                        rs.getString("INITIAL_DATE"),
+                        rs.getString("Delivery_Status"),
+                        rs.getDouble("Pricing"),
+                        rs.getInt("Receiver_ID")
+                );
                 result.add(model);
             }
 
@@ -114,29 +102,29 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
 
-        return result.toArray(new BranchModel[result.size()]);
+        return result.toArray(new DeliveryOrderModel[result.size()]);
     }
 
-    public void updateBranch(int id, String name) {
-        try {
-          PreparedStatement ps = connection.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
-          ps.setString(1, name);
-          ps.setInt(2, id);
+//    public void updateBranch(int id, String name) {
+//        try {
+//          PreparedStatement ps = connection.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
+//          ps.setString(1, name);
+//          ps.setInt(2, id);
+//
+//          int rowCount = ps.executeUpdate();
+//          if (rowCount == 0) {
+//              System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
+//          }
+//
+//          connection.commit();
+//
+//          ps.close();
+//        } catch (SQLException e) {
+//            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+//            rollbackConnection();
+//        }
+//    }
 
-          int rowCount = ps.executeUpdate();
-          if (rowCount == 0) {
-              System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
-          }
-
-          connection.commit();
-
-          ps.close();
-        } catch (SQLException e) {
-            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-            rollbackConnection();
-        }
-    }
-    */
     public boolean login(String username, String password) {
         try {
             if (connection != null) {
@@ -167,17 +155,18 @@ public class DatabaseConnectionHandler {
 
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("CREATE TABLE branch (branch_id integer PRIMARY KEY, branch_name varchar2(20) not null, branch_addr varchar2(50), branch_city varchar2(20) not null, branch_phone integer)");
+            stmt.executeUpdate("CREATE TABLE DeliveryOrder ( Order_ID INT PRIMARY KEY, Customer_ID INT, EID INT, INITIAL_DATE DATE, Delivery_Status CHAR(10), Pricing REAL, Receiver_ID INT) ");
             stmt.close();
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
 
-//		BranchModel branch1 = new BranchModel("123 Charming Ave", "Vancouver", 1, "First Branch", 1234567);
-//		insertBranch(branch1);
-//
-//		BranchModel branch2 = new BranchModel("123 Coco Ave", "Vancouver", 2, "Second Branch", 1234568);
-//		insertBranch(branch2);
+        DeliveryOrderModel order1 = new DeliveryOrderModel(1, 3, 104, "1-Apr-2020", "Delivered", 19.99, 6);
+        insertOrder(order1);
+
+        DeliveryOrderModel order2 = new DeliveryOrderModel(2, 3, 105, "2-Apr-2020", "Delivered", 9.99, 4);
+        insertOrder(order2);
+
     }
 
     private void dropBranchTableIfExists() {
@@ -186,8 +175,8 @@ public class DatabaseConnectionHandler {
             ResultSet rs = stmt.executeQuery("select table_name from user_tables");
 
             while(rs.next()) {
-                if(rs.getString(1).toLowerCase().equals("branch")) {
-                    stmt.execute("DROP TABLE branch");
+                if(rs.getString(1).toLowerCase().equals("deliveryorder")) {
+                    stmt.execute("DROP TABLE DeliveryOrder");
                     break;
                 }
             }

@@ -1,7 +1,7 @@
 package controller;
 
-import delegates.PackageTrackingDelegate;
-import ui.PackageTracking;
+import delegates.OrderTrackingDelegate;
+import ui.OrderTracking;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,10 +9,13 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Controller implements PackageTrackingDelegate {
+public class SuperMail implements OrderTrackingDelegate {
+
+
+
     public static void main(String[] args) throws IOException {
 
-        PackageTracking test = new PackageTracking();
+        OrderTracking test = new OrderTracking();
 
 
 

@@ -1,23 +1,23 @@
 package ui;
 
-import delegates.PackageTrackingDelegate;
+import delegates.OrderTrackingDelegate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class PackageTracking {
+public class OrderTracking {
     private static final String EXCEPTION_TAG = "[EXCEPTION]";
     private static final String WARNING_TAG = "[WARNING]";
     private static final int INVALID_INPUT = Integer.MIN_VALUE;
     private static final int EMPTY_INPUT = 0;
 
     private BufferedReader bufferedReader = null;
-    private PackageTrackingDelegate delegate = null;
+    private OrderTrackingDelegate delegate = null;
 
-    public PackageTracking() {}
+    public OrderTracking() {}
 
-    public void setupDatabase(PackageTrackingDelegate delegate) {
+    public void setupDatabase(OrderTrackingDelegate delegate) {
         this.delegate = delegate;
 
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));

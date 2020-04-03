@@ -1,6 +1,6 @@
 package delegates;
 
-public interface PackageTrackingDelegate {
+public interface OrderTrackingDelegate {
 
     void databaseSetup();
 
