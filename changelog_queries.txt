@@ -1,0 +1,30 @@
+changes from original schema:
+
+- items: made dimensions into 3 different fields (could potentially change this back?)
+
+- deliveryorder: made it a DATE type, added delivery date (which can be null if enroute)
+	changed DATE to initial_date (name conflict with type) 
+	added delivery_date (can be null; updated when delivered)
+
+- postofficeservicedby: changed PK to POID (previous PK could not be unique and caused errors)
+
+
+queries (requirements are in milestone 5 rubric):
+
+-insert: new deliveryorder
+
+-delete: an employee (cascades to workarea)
+
+-update: status of package
+
+-selection: select customer id's where address is the same
+
+-projection: select all undelivered packages for a certain order
+
+-join: customers whose orders were placed with an employee
+
+-aggregate: maximum amount of time to get a package from one zip to another
+
+-nested aggregate: average number of items per deliveryorder
+
+-division: ???

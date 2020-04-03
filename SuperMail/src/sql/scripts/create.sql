@@ -3,7 +3,7 @@ DROP TABLE DeliveryOrder;
 DROP TABLE EmployeeWorkArea;
 DROP TABLE MailboxServicedBy;
 DROP TABLE PostOffice;
--- DROP TABLE AreaServicedByPO;
+DROP TABLE AreaServicedByPO;
 DROP TABLE PostOfficeDetails;
 DROP TABLE Customer;
 DROP TABLE Receiver;
@@ -54,18 +54,18 @@ CREATE TABLE PostOffice (
   FOREIGN KEY (POID) REFERENCES PostOfficeDetails(POID) ON DELETE SET NULL
 );
 
--- Why are we not using this?
--- CREATE TABLE AreaServicedByPO (
---   Work_Area CHAR(20) PRIMARY KEY,
---   POID INT,
---   FOREIGN KEY (Work_Area) REFERENCES EmployeeWorkArea(Work_Area)
--- );
+CREATE TABLE AreaServicedByPO (
+  POID INT PRIMARY KEY,
+  Work_Area CHAR(20),
+  FOREIGN KEY  (POID) REFERENCES POSTOFFICEDETAILS(POID)
+);
 
 CREATE TABLE DeliveryOrder (
     Order_ID INT PRIMARY KEY,
     Customer_ID INT,
     EID INT,
-    "DATE" DATE,
+    INITIAL_DATE DATE,
+    DELIVERY_DATE DATE,
     Priority CHAR(6),
     Delivery_Status CHAR(10),
     Pricing REAL,
@@ -76,15 +76,15 @@ CREATE TABLE DeliveryOrder (
 );
 
 CREATE TABLE Items (
-                       Item_ID INT PRIMARY KEY,
-                       Order_ID INT,
-                       LENGTH INT,
-                       WIDTH INT,
-                       HEIGHT INT,
-                       Weight INT,
-                       Fragility CHAR(6),
-                       FOREIGN KEY (Order_ID) REFERENCES DeliveryOrder(Order_ID) ON DELETE
-                           CASCADE
+   Item_ID INT PRIMARY KEY,
+   Order_ID INT,
+   LENGTH INT,
+   WIDTH INT,
+   HEIGHT INT,
+   Weight INT,
+   Fragility CHAR(6),
+   FOREIGN KEY (Order_ID) REFERENCES DeliveryOrder(Order_ID) ON DELETE
+       CASCADE
 )
 
 
