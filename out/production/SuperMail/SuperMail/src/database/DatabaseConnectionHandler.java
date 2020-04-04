@@ -159,7 +159,7 @@ public class DatabaseConnectionHandler {
 
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("CREATE TABLE DeliveryOrder ( Order_ID INT PRIMARY KEY, Customer_ID INT, EID INT, initial_date Date, delivery_date Date, Delivery_Status CHAR(10), Pricing REAL, Receiver_ID INT) ");
+            stmt.executeUpdate("CREATE TABLE DeliveryOrder ( Order_ID INT PRIMARY KEY, Customer_ID INT, EID INT, INITIAL_DATE DATE, Delivery_Status CHAR(10), Pricing REAL, Receiver_ID INT) ");
             stmt.close();
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
