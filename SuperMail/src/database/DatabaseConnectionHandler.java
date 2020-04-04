@@ -59,7 +59,7 @@ public class DatabaseConnectionHandler {
 
     public void insertOrder(DeliveryOrderModel model) {
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO DeliveryOrder VALUES (?,?,?,?,?,?,?,?)");
+            PreparedStatement ps = this.connection.prepareStatement("INSERT INTO deliveryorder VALUES (?,?,?,?,?,?,?,?)");
             ps.setInt(1, model.getOrder_ID());
             ps.setInt(2, model.getCustomer_ID());
             ps.setInt(3, model.getEID());
